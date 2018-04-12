@@ -47,13 +47,19 @@ var readData=(start,stop,fileName)=>{
     if(filteredNotes.length==0)
     return Promise.reject("empty");
     else{
+        i=0;
         filteredNotes.forEach((note)=>{
-        	setTimeout(()=>{replay.set({
-            angle1: note.angle1,
+            var sleep=Math.abs(note.timestamp-start)+100;
+        	setTimeout(()=>{
+                replay.set({
+            angle1:note.angle1,
             angle2:note.angle2,
             angle3:note.angle3
           });
-        },1000) });
+            },sleep*i)
+    i++;
+    start=note.timestamp;
+ });
         return Promise.resolve("Ok");
     }    
 

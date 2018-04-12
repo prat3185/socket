@@ -16,9 +16,6 @@ var config = {
 };
 var app1= firebase.initializeApp(config);
 var reference = firebase.database().ref().child("object");
-var strDate="2018-4-12 15:02:05";
-    var datum = Date.parse(strDate);
-    console.log(datum);
 var data=require('./utils/data');
 var pathToServe=path.join(__dirname,'../public');
 var port=process.env.PORT || 3000;
@@ -47,11 +44,6 @@ io.on('connection',(socket)=>{
         });
     });
 
-//     socket.on('createLocationMessage',(coords)=>{
-//         io.emit('newLocationMessage',generateLocationMessage("Admin",coords));
-//     })
-
-//
  });
 
 server.listen(port,()=>{

@@ -7,7 +7,7 @@ var play=1;
 	    if (!Detector.webgl) Detector.addGetWebGLMessage();
 
 	    var container, stats, clock, controls,raycaster,mouse;
-	    var camera, scene, renderer, mixer;
+	    var camera, scene, renderer, mixer,angle1,angle2,angle3;
 		var replay = firebase.database().ref().child('Replay');
 	    const angleRef = firebase.database().ref().child('object');
 		var temperatureRef = firebase.database().ref().child('temperature');
@@ -200,7 +200,9 @@ var play=1;
 			});
 		}
 		else{
-			replay.on('value', snap => {
+			
+			replay.on('value', (snap) => {
+				//console.log(snap.val().angle1);
 				angle1=snap.val().angle1;
 				angle2=snap.val().angle2;
 				angle3=snap.val().angle3;
