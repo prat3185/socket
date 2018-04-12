@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test</title>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bluebird/2.9.4/bluebird.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
+    <script>
+    var config = {
+        apiKey: "AIzaSyDo1Jz7FTyOxmkdw3B2IixfSNxQJiGpvnw",
+        authDomain: "test-eefa2.firebaseapp.com",
+        databaseURL: "https://test-eefa2.firebaseio.com",
+        projectId: "test-eefa2",
+        storageBucket: "test-eefa2.appspot.com",
+        messagingSenderId: "334050492647"
+      };
+        firebase.initializeApp(config);
+      
+      
+ 
+       const dataref=firebase.database().ref().child('object');
+
+       function timeout(range, time, callback){
+    var i = range[0];                
+    callback(i);
+    Loop();
+    function Loop(){
+        setTimeout(function(){
+            i+=0.1;
+            if (i<range[1]){
+                callback(i);
+                Loop();
+            }
+        }, time*1000)
+    } 
+}
+
+function updateAngle1(i){
+        dataref.update({"angle1":parseFloat(i)}); 
+       }
+       
+       
+       function updateAngle2(i){
+        dataref.update({"angle2":parseFloat(-i)}); 
+       }
+       
+       function updateAngle3(i){
+        dataref.update({"angle3":parseFloat(i)}); 
+       }
+       
+       function updateAngle4(i){
+        dataref.update({"angle4":parseFloat(i)}); 
+       }
+
+ 
+       
+    function moveJoint1(){
+        timeout([0.17,1.84],0.1,updateAngle1);
+    }
+    function moveJoint2(){
+        timeout([0.52,2.88],0.1,updateAngle2);
+    }
+    function moveJoint4(){
+        timeout([-1.22,2.40],0.1,updateAngle3);
+    }
+    function moveTop(){
+        timeout([-3.14,3.14],0.1,updateAngle4);      
+        }
+
+    function reset(){
+        dataref.update({"angle1":parseFloat(0.88)});
+        dataref.update({"angle2":parseFloat(-1.94)});
+        dataref.update({"angle3":parseFloat(0.88)});
+        dataref.update({"angle4":parseFloat(0)});   
+    }
+        </script>
+</head>
+<body>
+<button onclick="moveJoint1();">Joint1</button>
+<button onclick="moveJoint2();">Joint2</button>
+<button onclick="moveJoint4();">Joint4</button>
+<button onclick="moveTop();">movetop</button>
+<button onclick="reset();">reset</button>
+</body>
+</html>

@@ -1,0 +1,25 @@
+group movetop: 
+rotate(y)
+intial value: 0
+rotation value: 3.14 to -3.14
+
+joint1:
+rotate(x)
+initial value: 
+0.88 (50)
+rotation value: 0.174533(10|)to
+1.8326(105)
+
+joint 2:
+rotate(z)
+intial value:  -1.94375(-111)
+rotation value:
+-2.87979(-165) to
+-0.523599(-30)
+
+joint4:
+rotation(x)
+intial value: 0.88(50)
+rotation value:
+-1.22173(-70) to
+2.40(150)

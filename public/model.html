@@ -1,0 +1,193 @@
+
+<html>
+
+<head>
+    <title>DigiRepli</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            height: 100%;
+            overflow: inherit;
+        }
+        
+        .nopad {
+            padding: 0 !important;
+            margin: 0 !important;
+            z-index: 0!important;
+        }
+        
+        h3,
+        .navbar-header {
+            margin: 0px auto;
+            text-align: center !important;
+            float: none !important;
+        }
+        
+        .try {
+            display: inline !important;
+        }
+        
+        .sidebar {
+            height: 100%;
+            margin: 0;
+        }
+    </style>
+    <link href="album.css" rel="stylesheet">
+
+    <link href="dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="build/three.js"></script>
+
+    <script src='js/libs/dat.gui.min.js'></script>
+
+    <script src="js/Detector.js"></script>
+    <script src="js/libs/stats.min.js"></script>
+
+    <script src="js/controls/OrbitControls.js"></script>    
+    
+    
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bluebird/2.9.4/bluebird.min.js"></script>
+
+  
+
+    <script src="js/loaders/ColladaLoader.js"></script>
+    <script src="js/loaders/OBJLoader.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bluebird/2.9.4/bluebird.min.js"></script>
+
+    <!-- <script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script> -->
+
+</head>
+
+<body>
+    <div>
+
+
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark nopad" style="border-radius:0">
+            <a class="navbar-brand" href="#">
+                DigiRepli
+        </a>
+        </nav>
+        <div class="container-fluid nopad" style="width: inherit;">
+            <div class="row nopad">
+                <div class="col col-md-9 nopad">
+                    <div class="row" class="col-md-9">
+                        <div id="webglcontainer"></div>
+                    </div>
+                    <div class="row" style="margin:5px">
+                           
+                        <div class="col-md-4">
+                            <iframe src="../charts/dynamic-line-chart.html" height="270px" max-width: "920px"></iframe>
+                        </div>
+                        
+                        
+                        <div class="col-md-4">
+                            <iframe src="../charts/dynamic-column-chart.html" height="270px" max-width: "920px"></iframe>
+                        </div>
+                        
+                        
+                        <div class="col-md-4">
+                            <iframe src="../charts/null-data-chart.html" height="270px" max-width: "920px"></iframe>
+                        </div>
+                        
+                    </div>
+
+
+                </div>
+
+
+                <div class="col-md-3 sidebar">
+                        <div style="text-align: center; border: 2px solid black;">
+                    <div class="card mb-3 box-shadow">
+                        <iframe src="../charts/pie-chart.html" style="height: 270px; max-width: 920px;"></iframe>
+                    </div>
+            </div>
+                    <div style="text-align: center; border: 2px solid black; margin-top: 8px; padding-bottom: 10px">
+                            <h3> Actions </h3>
+                            <hr>
+                            <div class="row" style="margin-top: 10px;">
+                                <button class="btn btn-primary" style="width: 80px; margin-left: 50px;" onclick="moveJoint1();">Joint1</button>
+                                <button class="btn btn-primary" style="width: 80px; margin-left: 50px;" onclick="moveJoint2();">Joint2</button>
+                                
+                            </div>
+                            <div class="row" style="margin-top: 10px;">
+                                    <button class="btn btn-primary" style="width: 80px; margin-left: 50px;" onclick="moveJoint4();">Joint3</button>
+                                <button class="btn btn-primary" style="width: 80px; margin-left: 50px;" onclick="moveTop();">Movetop</button>
+                            </div>
+                            <div class="row" style="margin-top: 10px;">
+                                    <button class="btn btn-primary" style="width: 100px; margin-left: 40px;" onclick="moveJoint1back();">Joint1back</button>
+                                    <button class="btn btn-primary" style="width: 100px; margin-left: 30px;" onclick="moveJoint2back();">Joint2back</button>
+                                    
+                                </div>
+
+
+                                <div class="row" style="margin-top: 10px;">
+                                    <button class="btn btn-primary" style="width: 100px; margin-left: 40px;" onclick="moveJoint4back();">Joint3back</button>
+                                   <button class="btn btn-primary" onclick="reset();" style="width: 100px; margin-left: 30px;">reset</button>
+                            </div>
+                        </div>
+
+                    <div style="text-align: center; border: 2px solid black; margin-top:5px">
+                        <h3>Sensor Data</h3>
+                        <hr size="30">
+                        <input type="text" placeholder="Angle-1" id="p1"></input><br><br>
+                        <input type="text" placeholder="Angle-2" id="p2"></input><br><br>
+                        <input type="text" placeholder="Angle-3" id="p3"></input><br><br>
+                        <input type="text" placeholder="Angle-4" id="p4"></input><br><br>
+                    </div>
+
+                    
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel" style="color:#2979FF">Sensor Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <label for="sensor-value">Sensor Value : </label>
+                    <span id="sensor-value" style="font-size:18px; color:green"> </span><br>
+                    <label for="status">Sensor Status : </label>
+                    <span id="status" style="font-size:18px; color:green"><b>Working</b></span><br>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
+   
+    <script>
+        // Initialize Firebase
+        
+        var config = {
+            apiKey: "AIzaSyDo1Jz7FTyOxmkdw3B2IixfSNxQJiGpvnw",
+            authDomain: "test-eefa2.firebaseapp.com",
+            databaseURL: "https://test-eefa2.firebaseio.com",
+            projectId: "test-eefa2",
+            storageBucket: "",
+            messagingSenderId: "334050492647"
+        };
+       var app= firebase.initializeApp(config);
+
+</script>
+ <script src="/socket.io/socket.io.js"></script>
+ <script src="index.js"></script>
+   <script src="main.js"></script>
+
+</body>
+
+</html5
