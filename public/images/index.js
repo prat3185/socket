@@ -25,86 +25,66 @@ var play=1;
 			
 			
 			container = document.getElementById('webglcontainer');
-			 scene = new THREE.Scene();
-			// var color = new THREE.Color("rgb(17, 177, 238)");
-			 camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+			var scene = new THREE.Scene();
+			var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 		   // scene.background = color;
+		   camera.position.z = 3;
 
-		   renderer = new THREE.WebGLRenderer({ antialias: true });
-		   renderer.setPixelRatio(window.devicePixelRatio);
-		   renderer.setSize(970, 550);
-		   renderer.setSize(window.innerWidth * 0.75,window.innerHeight * 0.75);
-		   container.appendChild(renderer.domElement);
-
-		   var sphere = new THREE.Mesh(
-			new THREE.SphereGeometry(100, 40, 40),
-			new THREE.MeshBasicMaterial({
-			  map: THREE.ImageUtils.loadTexture('images/construction.jpg'),
-			  side:THREE.DoubleSide
-			})
-		  );
-		 scene.scale.x=-1;
-		  scene.add(sphere);
 	     //   clock = new THREE.Clock();
 
-		 var floorTexture = new THREE.ImageUtils.loadTexture( 'images/scene_dn.png' );
-		 floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping;
-		 floorTexture.repeat.set( 1, 1 );
-		 var floorMaterial = new THREE.MeshBasicMaterial({ map: floorTexture, side: THREE.DoubleSide });
-		 var floorGeometry = new THREE.PlaneGeometry(500, 500, 100, 100);
-		 var floor = new THREE.Mesh(floorGeometry, floorMaterial);
-		 floor.position.y = -25;
-		 floor.rotation.x = Math.PI / 2;
-		 scene.add(floor);
-
-		//  var geometry = new THREE.CubeGeometry( 250, 250, 250 );
-		// 	var cubeMaterials = [
-		// 		new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load( "https://ccsbestpractice.org.uk/wp-content/uploads/2017/05/360-3.png" ), side: THREE.DoubleSide }), //front side
-		// 		// new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load( 'images/scene_bk.png' ), side: THREE.DoubleSide }), //back side
-		// 		// new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load( 'images/scene_up.png' ), side: THREE.DoubleSide }), //up side
-		// 		// new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load( 'images/scene_dn.png' ), side: THREE.DoubleSide }), //down side
-		// 		// new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load( 'images/scene_rt.png' ), side: THREE.DoubleSide }), //right side
-		// 		// new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load( 'images/scene_lf.png' ), side: THREE.DoubleSide }) //left side
-		// 	];
+		 var geometry = new THREE.CubeGeometry( 250, 250, 250 );
+		 var cubeMaterials = [
+			 new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load( "images/mp_deception/deception_pass_ft.tga" ), side: THREE.DoubleSide }), //front side
+			 new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load( 'images/mp_deception/deception_pass_ft.tga' ), side: THREE.DoubleSide }), //back side
+			 new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load( 'images/mp_deception/deception_pass_ft.tga' ), side: THREE.DoubleSide }), //up side
+			 new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load( 'images/mp_deception/deception_pass_ft.tga' ), side: THREE.DoubleSide }), //down side
+			 new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load( 'images/mp_deception/deception_pass_ft.tga' ), side: THREE.DoubleSide }), //right side
+			 new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load( 'images/mp_deception/deception_pass_ft.tga' ), side: THREE.DoubleSide }) //left side
+		 ];
 		 
-		//  var cubeMaterial = new THREE.MeshFaceMaterial( cubeMaterials );
-		//  var cube = new THREE.Mesh( geometry, cubeMaterial );
-		//  scene.add( cube );
-		//  camera.position.z = 3;
-		 camera.position.set(10, 10, 4);
-			var loader = new THREE.ObjectLoader();
-			loader.load('jcb.json',function ( object ) {
-					scene.add( object );
-					scene.children[4].traverse(function(children){
-						objects.push(children);
-					});
-					console.log(objects);	
-				},
-				function ( xhr ) {
-					console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
-				},
-				function ( error ) {
-					console.log( 'An error happened' );
-				}
-			);
+		 var cubeMaterial = new THREE.MeshFaceMaterial( cubeMaterials );
+		 var cube = new THREE.Mesh( geometry, cubeMaterial );
+		 scene.add( cube );
+
+			// var loader = new THREE.ObjectLoader();
+			// loader.load('jcb.json',function ( object ) {
+			// 		scene.add( object );
+			// 		scene.children[3].traverse(function(children){
+			// 			objects.push(children);
+			// 		});
+			// 		console.log(objects);	
+			// 	},
+			// 	function ( xhr ) {
+			// 		console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+			// 	},
+			// 	function ( error ) {
+			// 		console.log( 'An error happened' );
+			// 	}
+			// );
 
 
-
-	        var ambientLight = new THREE.AmbientLight(0xffffff, 0.2);
-	        scene.add(ambientLight);
-
-	        var directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
-	        //  directionalLight.position.set( 1, 1, - 1 );
-	        scene.add(directionalLight);
+	        // var gridHelper = new THREE.GridHelper(10, 20);
+	        // scene.add(gridHelper);
 
 
-	        
+	        // var ambientLight = new THREE.AmbientLight(0xffffff, 0.2);
+	        // scene.add(ambientLight);
+
+	        // var directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+	        // //  directionalLight.position.set( 1, 1, - 1 );
+	        // scene.add(directionalLight);
 
 
-			controls = new THREE.OrbitControls(camera, renderer.domElement);
-			controls.maxPolarAngle=Math.PI / 2.1;
-			
-	      //  controls.update();
+	        renderer = new THREE.WebGLRenderer({ antialias: true });
+	        renderer.setPixelRatio(window.devicePixelRatio);
+			renderer.setSize(970, 550);
+			renderer.setSize(window.innerWidth * 0.75,window.innerHeight * 0.75);
+	        container.appendChild(renderer.domElement);
+
+
+	        controls = new THREE.OrbitControls(camera, renderer.domElement);
+	        controls.target.set(0, 2, 0);
+	        controls.update();
 
 			raycaster=new THREE.Raycaster();
 			mouse=new THREE.Vector2();
@@ -208,25 +188,19 @@ var play=1;
 
 	    function animate() {
 
-			requestAnimationFrame(animate);
-		// 	 controls.center =  new THREE.Vector3(
-		// 	scene.children[3].position.x,
-		// 	scene.children[3].position.y,
-		// 	scene.children[3].position.z
-		// );
-	       // controls.target.set(scene.children[3].position.x, scene.children[3].position.y, scene.children[3].position.z);
-		controls.target.set(-15,-25,-15);
-		controls.update();
+	        requestAnimationFrame(animate);
+
 	        render();
 	    }
 
 	    function render() {
-	        scene.children[4].scale.x = 40;
-	        scene.children[4].scale.y = 40;
-	        scene.children[4].scale.z = 40;
-		  scene.children[4].position.y = -25;
-		  scene.children[4].position.x=15;
-		  scene.children[4].position.z=-15;
+
+	     //   console.log(scene);
+
+	    //     scene.children[3].scale.x = 10;
+	    //     scene.children[3].scale.y = 10;
+	    //     scene.children[3].scale.z = 10;
+		//    // scene.children[3].rotation.y = 1.5;
 		//    if(play==0){
 	    //     angleRef.on('value', snap => {
 		// 		angle1=snap.val().angle1;
@@ -253,7 +227,7 @@ var play=1;
 	//	}
 
 	        renderer.render(scene, camera);
-			controls.update();
+
 	    }
 
 	
